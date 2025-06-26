@@ -1,4 +1,4 @@
-name: cpi-pipeline
+name: cpi-pipeline-qa
 on:
   workflow_dispatch:
 
