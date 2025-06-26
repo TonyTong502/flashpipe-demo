@@ -2,18 +2,20 @@ name: cpi-pipeline-qa
 on:
   workflow_dispatch:
 
+env:
+  FLASHPIPE_TMN_HOST: ${{ vars.CPI_HOST }}
+  FLASHPIPE_OAUTH_HOST: ${{ vars.TOKEN_HOST }}
+  FLASHPIPE_OAUTH_CLIENTID: ${{ secrets.DEV_CLIENT_ID }}
+  FLASHPIPE_OAUTH_CLIENTSECRET: ${{ secrets.DEV_CLIENT_SECRET }}
+  FLASHPIPE_PACKAGE_ID: FlashPipeDemo
+  FLASHPIPE_PACKAGE_NAME: "FlashPipe Demo"
+
 jobs:
-  build:
+  upload-and-deploy:
     runs-on: ubuntu-latest
     container:
       image: engswee/flashpipe:latest
-    env:
-      FLASHPIPE_TMN_HOST: ${{ vars.CPI_HOST }}
-      FLASHPIPE_OAUTH_HOST: ${{ vars.TOKEN_HOST }}
-      FLASHPIPE_OAUTH_CLIENTID: ${{ secrets.DEV_CLIENT_ID }}
-      FLASHPIPE_OAUTH_CLIENTSECRET: ${{ secrets.DEV_CLIENT_SECRET }}
-      FLASHPIPE_PACKAGE_ID: FlashPipeDemo
-      FLASHPIPE_PACKAGE_NAME: "FlashPipe Demo"
+
     steps:
       - uses: actions/checkout@v4
 
