@@ -33,8 +33,8 @@ jobs:
           oauth-host: ${{ vars.TOKEN_HOST }}
           oauth-clientid: ${{ secrets.DEV_CLIENT_ID }}
           oauth-clientsecret: ${{ secrets.DEV_CLIENT_SECRET }}
-          artifact-id: INVOIC02_Message_Mapping
-          artifact-name: INVOIC02 Message Mapping
+          artifact-id: INVOIC02_to_Invoice_XML
+          artifact-name: INVOIC02 to Invoice XML
           package-id: FlashPipeDemo
           package-name: FlashPipe Demo
           dir-artifact-relative: FlashPipe Demo/INVOIC02_to_Invoice_XML
