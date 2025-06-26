@@ -48,4 +48,4 @@ jobs:
           oauth-host: ${{ vars.TOKEN_HOST }}
           oauth-clientid: ${{ secrets.DEV_CLIENT_ID }}
           oauth-clientsecret: ${{ secrets.DEV_CLIENT_SECRET }}
-          artifact-ids: GroovyXMLTransformation,INVOIC02_Message_Mapping
+          artifact-ids: GroovyXMLTransformation,INVOIC02_to_Invoice_XML
