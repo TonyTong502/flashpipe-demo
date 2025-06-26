@@ -1,0 +1,43 @@
+name: cpi-pipeline
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container:
+      image: engswee/flashpipe:latest
+    env:
+      FLASHPIPE_TMN_HOST: ${{ vars.CPI_HOST }}
+      FLASHPIPE_OAUTH_HOST: ${{ vars.TOKEN_HOST }}
+      FLASHPIPE_OAUTH_CLIENTID: ${{ secrets.DEV_CLIENT_ID }}
+      FLASHPIPE_OAUTH_CLIENTSECRET: ${{ secrets.DEV_CLIENT_SECRET }}
+      FLASHPIPE_PACKAGE_ID: FlashPipeDemo
+      FLASHPIPE_PACKAGE_NAME: "FlashPipe Demo"
+    steps:
+      - uses: actions/checkout@v4
+
+      # Upload/Update design time artifact
+      - name: 'Update/Upload Groovy XML Transformation to design time'
+        uses: engswee/flashpipe-action/update/artifact@v1
+        with:
+          artifact-id: GroovyXMLTransformation
+          artifact-name: Groovy XML Transformation
+          dir-artifact-relative: FlashPipe Demo/Groovy XML Transformation
+          file-param: FlashPipe Demo/Groovy XML Transformation/QA/parameters.prop
+
+      # Upload/Update design time artifact
+      - name: 'Update/Upload INVOIC02_Message_Mapping to design time'
+        uses: engswee/flashpipe-action/update/artifact@v1
+        with:
+          artifact-id: INVOIC02_Message_Mapping
+          artifact-name: INVOIC02 Message Mapping
+          dir-artifact-relative: FlashPipe Demo/INVOIC02_to_Invoice_XML
+          file-param: FlashPipe Demo/INVOIC02_to_Invoice_XML/QA/parameters.prop
+
+      # Deploy to runtime
+      - name: 'Deploy Groovy XML Transformation to runtime'
+        uses: engswee/flashpipe-action/deploy@v1
+        with:
+          artifact-ids: GroovyXMLTransformation,INVOIC02_Message_Mapping
+      
