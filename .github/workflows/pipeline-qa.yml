@@ -2,20 +2,11 @@ name: cpi-pipeline-qa
 on:
   workflow_dispatch:
 
-# env:
-#   FLASHPIPE_TMN_HOST: ${{ vars.CPI_HOST }}
-#   FLASHPIPE_OAUTH_HOST: ${{ vars.TOKEN_HOST }}
-#   FLASHPIPE_OAUTH_CLIENTID: ${{ secrets.DEV_CLIENT_ID }}
-#   FLASHPIPE_OAUTH_CLIENTSECRET: ${{ secrets.DEV_CLIENT_SECRET }}
-#   FLASHPIPE_PACKAGE_ID: FlashPipeDemo
-#   FLASHPIPE_PACKAGE_NAME: "FlashPipe Demo"
-
 jobs:
-  upload-and-deploy:
+  build:
     runs-on: ubuntu-latest
     container:
       image: engswee/flashpipe:latest
-
     steps:
       - uses: actions/checkout@v4
 
@@ -27,10 +18,10 @@ jobs:
           oauth-host: ${{ vars.TOKEN_HOST }}
           oauth-clientid: ${{ secrets.DEV_CLIENT_ID }}
           oauth-clientsecret: ${{ secrets.DEV_CLIENT_SECRET }}
-          package-id: FlashPipeDemo
-          package-name: FlashPipe Demo
           artifact-id: GroovyXMLTransformation
           artifact-name: Groovy XML Transformation
+          package-id: FlashPipeDemo
+          package-name: FlashPipe Demo
           dir-artifact-relative: FlashPipe Demo/Groovy XML Transformation
           file-param: FlashPipe Demo/Groovy XML Transformation/QA/parameters.prop
 
@@ -42,10 +33,10 @@ jobs:
           oauth-host: ${{ vars.TOKEN_HOST }}
           oauth-clientid: ${{ secrets.DEV_CLIENT_ID }}
           oauth-clientsecret: ${{ secrets.DEV_CLIENT_SECRET }}
-          package-id: FlashPipeDemo
-          package-name: FlashPipe Demo
           artifact-id: INVOIC02_Message_Mapping
           artifact-name: INVOIC02 Message Mapping
+          package-id: FlashPipeDemo
+          package-name: FlashPipe Demo
           dir-artifact-relative: FlashPipe Demo/INVOIC02_to_Invoice_XML
           file-param: FlashPipe Demo/INVOIC02_to_Invoice_XML/QA/parameters.prop
 
@@ -58,4 +49,3 @@ jobs:
           oauth-clientid: ${{ secrets.DEV_CLIENT_ID }}
           oauth-clientsecret: ${{ secrets.DEV_CLIENT_SECRET }}
           artifact-ids: GroovyXMLTransformation,INVOIC02_Message_Mapping
-      
